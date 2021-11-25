@@ -1,6 +1,7 @@
 import express, { Application } from "express";
 import mongoose from "mongoose";
 require("dotenv").config();
+import cors from "./util/cors";
 import { homeRoute } from "./routes/public/users";
 import { errorRoute } from "./routes/public/error";
 
@@ -12,6 +13,7 @@ const uri: string = process.env.MONGODB_URL;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors);
 
 app.use("/api", ApiRoutes);
 app.get("/", homeRoute);
