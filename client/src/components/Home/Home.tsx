@@ -54,10 +54,17 @@ const Home = () => {
               key={chunkItem?.id}
               value={chunkItem?.value}
               icon_url={chunkItem?.icon_url}
+              id={chunkItem?.id}
+              url={chunkItem.url}
             />
           ))
         ) : (
-          <ChunkFactCard value={chunk?.value} icon_url={chunk?.icon_url} />
+          <ChunkFactCard
+            value={chunk?.value}
+            icon_url={chunk?.icon_url}
+            id={chunk?.id}
+            url={chunk?.url}
+          />
         )}
       </div>
     </div>

@@ -45,10 +45,32 @@ const searchChunks = async (query: string): Promise<ChunksArray> => {
   }
 };
 
+const addChunkToFavourite = async (
+  url: string,
+  value: string,
+  icon_url: string,
+  id: string
+): Promise<void> => {
+  try {
+    const email = localStorage.getItem("email");
+    if (email && email !== "") {
+      const result = await axios.post("http://localhost:3500/api/chunks", {
+        email: email,
+        url: url,
+        value: value,
+        icon_url: icon_url,
+        id: id,
+      });
+      console.log(result.status);
+    }
+  } catch (error) {}
+};
+
 const chunksServices = {
   fetchRandomChunks,
   fetchChunksCategories,
   searchChunks,
+  addChunkToFavourite,
 };
 
 export default chunksServices;
