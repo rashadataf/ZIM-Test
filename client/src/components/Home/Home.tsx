@@ -40,6 +40,18 @@ const Home = () => {
   return (
     <div className={classes.Home}>
       <div className={classes.HomeHeader}>
+        {isSearch ? null : (
+          <button
+            onClick={() =>
+              chunksServices
+                .fetchRandomChunks()
+                .then((result) => setChunk(result))
+            }
+            className={classes.HomeHeaderButton}
+          >
+            New One
+          </button>
+        )}
         <input
           className={classes.HomeHeaderSearchBox}
           type="text"
