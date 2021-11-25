@@ -7,3 +7,8 @@ export interface Chunk {
   url: string;
   value: string;
 }
+
+export interface ChunksArray {
+  result: Array<Chunk>;
+  total: number;
+}
