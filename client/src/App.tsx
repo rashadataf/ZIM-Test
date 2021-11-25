@@ -1,4 +1,5 @@
 import React from "react";
+import { Routes, Route } from "react-router-dom";
 import Home from "./components/Home/Home";
 import Navbar from "./components/Navbar/Navbar";
 import Modal from "react-modal";
@@ -49,7 +50,10 @@ function App() {
     <div className="app">
       <Navbar />
       <main className="main">
-        <Home />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          {/* <Route path="favourites" element={<About />} /> */}
+        </Routes>
       </main>
       <Modal
         isOpen={modalIsOpen}
