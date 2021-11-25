@@ -50,7 +50,7 @@ const addChunkToFavourite = async (
   value: string,
   icon_url: string,
   id: string
-): Promise<void> => {
+): Promise<boolean> => {
   try {
     const email = localStorage.getItem("email");
     if (email && email !== "") {
@@ -61,9 +61,34 @@ const addChunkToFavourite = async (
         icon_url: icon_url,
         id: id,
       });
-      console.log(result.status);
+      if (result.status === 201)
+        alert("chunk added successfully to favourites!");
+      return true;
     }
-  } catch (error) {}
+    return false;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+};
+
+const removeChunkFromFavourite = async (id: string): Promise<boolean> => {
+  try {
+    const email = localStorage.getItem("email");
+    console.log(email);
+    if (email && email !== "") {
+      const result = await axios.delete(
+        `http://localhost:3500/api/chunks?email=${email}&id=${id}`
+      );
+      if (result.status === 200)
+        alert("chunk was removed successfully from favourites!");
+      return true;
+    }
+    return false;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
 };
 
 const chunksServices = {
@@ -71,6 +96,7 @@ const chunksServices = {
   fetchChunksCategories,
   searchChunks,
   addChunkToFavourite,
+  removeChunkFromFavourite,
 };
 
 export default chunksServices;
