@@ -91,3 +91,25 @@ export const removeChunk = async (
     return res.status(400).json({ error: error.message });
   }
 };
+
+export const checkIfFavourite = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  try {
+    const email: string = req.body.email;
+    const id: string = req.body.id;
+    const user: User = await UserModel.findOne({ email: email });
+    const chunk: Chunk = await ChunkModel.findOne({ id: id });
+    if (!user || user == null || !chunk || chunk == null) {
+      return res.send(false);
+    }
+
+    if (user.chunks.includes(chunk._id)) {
+      return res.send(true);
+    }
+    return res.send(false);
+  } catch (error) {
+    return res.status(400).send(false);
+  }
+};

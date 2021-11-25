@@ -97,13 +97,33 @@ const getFavouriteChunks = async (): Promise<Array<Chunk>> => {
       const result = await axios.get(
         `http://localhost:3500/api/chunks?email=${email}`
       );
-      
+
       return result.data.chunks;
     }
     return [];
   } catch (error) {
     console.log(error);
     return [];
+  }
+};
+
+const isChunkFavourite = async (id: string): Promise<boolean> => {
+  try {
+    const email = localStorage.getItem("email");
+    if (email && email !== "") {
+      const result = await axios.post(
+        `http://localhost:3500/api/chunks/isFavourite`,
+        {
+          email,
+          id,
+        }
+      );
+      return result.data;
+    }
+    return false;
+  } catch (error) {
+    console.log(error);
+    return false;
   }
 };
 
@@ -114,6 +134,7 @@ const chunksServices = {
   addChunkToFavourite,
   removeChunkFromFavourite,
   getFavouriteChunks,
+  isChunkFavourite,
 };
 
 export default chunksServices;

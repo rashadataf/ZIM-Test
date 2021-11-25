@@ -1,5 +1,5 @@
 import React from "react";
-import chunkServices from "../../services/fetchChunks";
+import chunksServices from "../../services/fetchChunks";
 import classes from "./ChunkFactCard.module.css";
 
 const ChunkFactCard = (props: {
@@ -12,9 +12,16 @@ const ChunkFactCard = (props: {
 }) => {
   const [isFavourite, setIsFavourite] = React.useState(false);
 
+  React.useEffect(() => {
+    if (!props.isFavourite && !isFavourite) {
+      chunksServices
+        .isChunkFavourite(props.id)
+        .then((result) => setIsFavourite(result));
+    }
+  });
   const addToFavourite = async () => {
     if (
-      await chunkServices.addChunkToFavourite(
+      await chunksServices.addChunkToFavourite(
         props.url,
         props.value,
         props.icon_url,
@@ -25,7 +32,7 @@ const ChunkFactCard = (props: {
   };
 
   const removeFromFavourite = async () => {
-    if (await chunkServices.removeChunkFromFavourite(props.id))
+    if (await chunksServices.removeChunkFromFavourite(props.id))
       setIsFavourite(false);
   };
 
