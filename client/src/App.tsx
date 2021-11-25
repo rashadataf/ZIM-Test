@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./components/Home/Home";
 import Navbar from "./components/Navbar/Navbar";
 import Modal from "react-modal";
+import Favourites from "./components/Favourites/Favourites";
 
 const customStyles = {
   content: {
@@ -52,7 +53,7 @@ function App() {
       <main className="main">
         <Routes>
           <Route path="/" element={<Home />} />
-          {/* <Route path="favourites" element={<About />} /> */}
+          <Route path="favourites" element={<Favourites />} />
         </Routes>
       </main>
       <Modal

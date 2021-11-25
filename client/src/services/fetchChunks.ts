@@ -75,7 +75,6 @@ const addChunkToFavourite = async (
 const removeChunkFromFavourite = async (id: string): Promise<boolean> => {
   try {
     const email = localStorage.getItem("email");
-    console.log(email);
     if (email && email !== "") {
       const result = await axios.delete(
         `http://localhost:3500/api/chunks?email=${email}&id=${id}`
@@ -91,12 +90,30 @@ const removeChunkFromFavourite = async (id: string): Promise<boolean> => {
   }
 };
 
+const getFavouriteChunks = async (): Promise<Array<Chunk>> => {
+  try {
+    const email = localStorage.getItem("email");
+    if (email && email !== "") {
+      const result = await axios.get(
+        `http://localhost:3500/api/chunks?email=${email}`
+      );
+      
+      return result.data.chunks;
+    }
+    return [];
+  } catch (error) {
+    console.log(error);
+    return [];
+  }
+};
+
 const chunksServices = {
   fetchRandomChunks,
   fetchChunksCategories,
   searchChunks,
   addChunkToFavourite,
   removeChunkFromFavourite,
+  getFavouriteChunks,
 };
 
 export default chunksServices;

@@ -7,6 +7,8 @@ const ChunkFactCard = (props: {
   icon_url: string;
   url: string;
   id: string;
+  isFavourite?: boolean;
+  updateFavouriteChunks?: Function;
 }) => {
   const [isFavourite, setIsFavourite] = React.useState(false);
 
@@ -28,8 +30,10 @@ const ChunkFactCard = (props: {
   };
 
   const toogleFavourite = async () => {
-    if (isFavourite) await removeFromFavourite();
-    else await addToFavourite();
+    if (isFavourite || props.isFavourite) {
+      await removeFromFavourite();
+      if (props.updateFavouriteChunks) props.updateFavouriteChunks();
+    } else await addToFavourite();
   };
   return (
     <div className={classes.ChunkFactCard}>
@@ -38,7 +42,7 @@ const ChunkFactCard = (props: {
         width="24"
         height="24"
         viewBox="0 0 24 24"
-        fill={isFavourite ? "red" : "black"}
+        fill={isFavourite || props.isFavourite ? "red" : "black"}
         className={classes.AddToFavourite}
         onClick={toogleFavourite}
       >
