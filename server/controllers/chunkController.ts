@@ -60,7 +60,6 @@ export const addChunk = async (
     const newChunk: Chunk = await chunk.save();
     return res.status(201).json({
       message: "Chunk was added to your favourite list",
-      chunk: newChunk,
     });
   } catch (error) {
     return res.status(400).json({ error: error.message });
