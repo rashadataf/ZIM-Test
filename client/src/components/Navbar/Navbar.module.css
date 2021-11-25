@@ -1,0 +1,36 @@
+.Header {
+    width: 100vw;
+    height: 10vh;
+    padding: var(--padding);
+    background-color: #091b2c;
+}
+
+.Header nav {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.Header nav ul {
+    width: 100%;
+    list-style-type: none;
+    display: flex;
+    justify-content: space-between;
+}
+
+.Header a {
+    text-decoration: none;
+    color: yellow;
+}
+
+.Header nav ul li a.active {
+    color: #0ff0ac;
+    border-bottom: #0ff0ac 3px solid;
+    padding-bottom: 2px;
+}
+
+@media screen and (min-width: 768px) {
+    .Header nav ul {
+        width: 50%;
+    }
+}
