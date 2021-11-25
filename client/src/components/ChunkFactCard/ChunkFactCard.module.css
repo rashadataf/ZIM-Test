@@ -1,0 +1,12 @@
+.ChunkFactCard {
+    text-align: center;
+    border-radius: 1rem;
+    max-width: 200px;
+    padding: 1rem;
+    background-color: cadetblue;
+}
+
+.ChunkFactCardText {
+    margin-top: 2rem;
+    color: #131313;
+}
