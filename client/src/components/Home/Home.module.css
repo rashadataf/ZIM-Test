@@ -1,0 +1,36 @@
+.Home {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 90vh;
+}
+
+.HomeHeader {
+    height: 20%;
+    width: 100%;
+    background-color: #60c460;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.HomeMain {
+    width: 100%;
+    height: 80%;
+    background-color: #fbff00;
+    display: flex;
+    padding: 1.5rem;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.HomeHeaderSearchBox {
+    width: 90%;
+    padding: 1rem;
+    font-size: 1.5rem;
+    outline: none;
+    border: none;
+    border-radius: 2rem;
+}
