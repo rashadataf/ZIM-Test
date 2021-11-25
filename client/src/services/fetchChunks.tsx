@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Chunk } from "../types/chunk";
+import { Chunk, ChunksArray } from "../types/chunk";
 
 const BASE_URL: string = "https://api.chucknorris.io/jokes";
 
@@ -32,13 +32,16 @@ const fetchChunksCategories = async (): Promise<Array<string>> => {
   }
 };
 
-const searchChunks = async (query: string): Promise<Array<Chunk>> => {
+const searchChunks = async (query: string): Promise<ChunksArray> => {
   try {
     const result = await axios.get(`${BASE_URL}/search?query=${query}`);
     return result.data;
   } catch (error) {
     console.log(error);
-    return [];
+    return {
+      result: [],
+      total: 0,
+    };
   }
 };
 
