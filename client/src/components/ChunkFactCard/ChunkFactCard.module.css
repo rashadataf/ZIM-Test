@@ -1,13 +1,30 @@
 .ChunkFactCard {
-    text-align: center;
-    border-radius: 1rem;
-    max-width: 200px;
-    padding: 1rem;
-    background-color: cadetblue;
-    margin-bottom: 1.5rem;
+  position: relative;
+  text-align: center;
+  border-radius: 1rem;
+  width: 100%;
+  padding: 1rem;
+  background-color: #bdb593;
+  margin-bottom: 1.5rem;
 }
 
 .ChunkFactCardText {
-    margin-top: 2rem;
-    color: #131313;
+  margin-top: 2rem;
+  color: #131313;
+}
+
+.AddToFavourite {
+  position: absolute;
+  left: 5%;
+  cursor: pointer;
+}
+
+.AddToFavourite:active {
+    fill: red;
+}
+
+@media screen and (min-width: 768px) {
+  .ChunkFactCard {
+    width: 30%;
+  }
 }
