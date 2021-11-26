@@ -18,6 +18,8 @@ const customStyles = {
   },
 };
 
+Modal.setAppElement("#root");
+
 function App() {
   const [modalIsOpen, setIsOpen] = React.useState(false);
   const [email, setEmail] = React.useState("");

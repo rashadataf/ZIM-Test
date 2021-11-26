@@ -113,3 +113,29 @@ export const checkIfFavourite = async (
     return res.status(400).send(false);
   }
 };
+
+export const editChunk = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  try {
+    const email: string = req.body.email;
+    const id: string = req.body.id;
+    const text: string = req.body.text;
+
+    const user: User = await UserModel.findOne({ email: email });
+    const chunk: Chunk = await ChunkModel.findOne({ id: id });
+    if (!user || user == null || !chunk || chunk == null) {
+      return res.status(404).json({ message: "can't find chunk!" });
+    }
+
+    if (user.chunks.includes(chunk._id)) {
+      chunk.value = text;
+      await chunk.save();
+      return res.json({ message: "you have edited the chunk successfully!" });
+    }
+    return res.status(404).json({ message: "can't find chunk!" });
+  } catch (error) {
+    return res.status(400).json({ message: error.message });
+  }
+};

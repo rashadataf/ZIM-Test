@@ -127,6 +127,28 @@ const isChunkFavourite = async (id: string): Promise<boolean> => {
   }
 };
 
+const updateFavouriteChunk = async (
+  text: string,
+  id: string
+): Promise<boolean> => {
+  try {
+    const email = localStorage.getItem("email");
+    if (email && email !== "") {
+      const result = await axios.put("http://localhost:3500/api/chunks", {
+        email: email,
+        text: text,
+        id: id,
+      });
+      if (result.status === 200) alert("chunk updated successfully!");
+      return true;
+    }
+    return false;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+};
+
 const chunksServices = {
   fetchRandomChunks,
   fetchChunksCategories,
@@ -135,6 +157,7 @@ const chunksServices = {
   removeChunkFromFavourite,
   getFavouriteChunks,
   isChunkFavourite,
+  updateFavouriteChunk,
 };
 
 export default chunksServices;

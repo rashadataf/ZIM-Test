@@ -20,7 +20,13 @@
 }
 
 .AddToFavourite:active {
-    fill: red;
+  fill: red;
+}
+
+.Edit {
+  position: absolute;
+  right: 5%;
+  cursor: pointer;
 }
 
 @media screen and (min-width: 768px) {
