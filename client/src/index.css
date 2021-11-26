@@ -1,5 +1,8 @@
 :root {
   --padding: 1rem;
+  --main-color: #e0ecde;
+  --nav-color: #062b31;
+  --header-color: #2c6975;
 }
 
 * {

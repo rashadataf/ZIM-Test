@@ -2,7 +2,7 @@
     width: 100vw;
     height: 10vh;
     padding: var(--padding);
-    background-color: #091b2c;
+    background-color: var(--nav-color);
 }
 
 .Header nav {
@@ -20,7 +20,7 @@
 
 .Header a {
     text-decoration: none;
-    color: yellow;
+    color: rgb(255, 200, 82);
     font-weight: 500;
 }
 

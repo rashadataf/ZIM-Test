@@ -8,7 +8,7 @@
 .HomeHeader {
   height: 20%;
   width: 100%;
-  background-color: #60c460;
+  background-color: var(--header-color);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -17,7 +17,7 @@
 .HomeMain {
   width: 100%;
   height: 80%;
-  background-color: #fbff00;
+  background-color: #e0ecde;
   display: flex;
   padding: 1.5rem;
   flex-wrap: wrap;
@@ -36,7 +36,7 @@
 
 .HomeHeaderButton {
   padding: 1rem;
-  background-color: #fbff00;
+  background-color: #6bb2a0;
   border: none;
   border-radius: 10px;
   font-weight: 800;
