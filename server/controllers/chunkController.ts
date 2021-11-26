@@ -23,7 +23,7 @@ export const getChunks = async (
     }
     return res.status(200).json({ chunks: [] });
   } catch (error) {
-    throw error;
+    return res.status(400).json({ error: error.message });
   }
 };
 
