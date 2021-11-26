@@ -1,11 +1,10 @@
 import axios from "axios";
 import { Chunk, ChunksArray } from "../types/chunk";
-
-const BASE_URL: string = "https://api.chucknorris.io/jokes";
+import { REMOTE_URL, LOCAL_URL } from "../config/apiUrls";
 
 const fetchRandomChunks = async (): Promise<Chunk> => {
   try {
-    const result = await axios.get(`${BASE_URL}/random`);
+    const result = await axios.get(`${REMOTE_URL}/random`);
 
     return result.data;
   } catch (error) {
@@ -24,7 +23,7 @@ const fetchRandomChunks = async (): Promise<Chunk> => {
 
 const fetchChunksCategories = async (): Promise<Array<string>> => {
   try {
-    const result = await axios.get(`${BASE_URL}/categories`);
+    const result = await axios.get(`${REMOTE_URL}/categories`);
     return result.data;
   } catch (error) {
     console.log(error);
@@ -34,7 +33,7 @@ const fetchChunksCategories = async (): Promise<Array<string>> => {
 
 const searchChunks = async (query: string): Promise<ChunksArray> => {
   try {
-    const result = await axios.get(`${BASE_URL}/search?query=${query}`);
+    const result = await axios.get(`${REMOTE_URL}/search?query=${query}`);
     return result.data;
   } catch (error) {
     console.log(error);
@@ -54,7 +53,7 @@ const addChunkToFavourite = async (
   try {
     const email = localStorage.getItem("email");
     if (email && email !== "") {
-      const result = await axios.post("http://localhost:3500/api/chunks", {
+      const result = await axios.post(`${LOCAL_URL}/api/chunks`, {
         email: email,
         url: url,
         value: value,
@@ -77,7 +76,7 @@ const removeChunkFromFavourite = async (id: string): Promise<boolean> => {
     const email = localStorage.getItem("email");
     if (email && email !== "") {
       const result = await axios.delete(
-        `http://localhost:3500/api/chunks?email=${email}&id=${id}`
+        `${LOCAL_URL}/api/chunks?email=${email}&id=${id}`
       );
       if (result.status === 200)
         alert("chunk was removed successfully from favourites!");
@@ -94,9 +93,7 @@ const getFavouriteChunks = async (): Promise<Array<Chunk>> => {
   try {
     const email = localStorage.getItem("email");
     if (email && email !== "") {
-      const result = await axios.get(
-        `http://localhost:3500/api/chunks?email=${email}`
-      );
+      const result = await axios.get(`${LOCAL_URL}/api/chunks?email=${email}`);
 
       return result.data.chunks;
     }
@@ -111,13 +108,10 @@ const isChunkFavourite = async (id: string): Promise<boolean> => {
   try {
     const email = localStorage.getItem("email");
     if (email && email !== "") {
-      const result = await axios.post(
-        `http://localhost:3500/api/chunks/isFavourite`,
-        {
-          email,
-          id,
-        }
-      );
+      const result = await axios.post(`${LOCAL_URL}/api/chunks/isFavourite`, {
+        email,
+        id,
+      });
       return result.data;
     }
     return false;
@@ -134,7 +128,7 @@ const updateFavouriteChunk = async (
   try {
     const email = localStorage.getItem("email");
     if (email && email !== "") {
-      const result = await axios.put("http://localhost:3500/api/chunks", {
+      const result = await axios.put(`${LOCAL_URL}/api/chunks`, {
         email: email,
         text: text,
         id: id,
