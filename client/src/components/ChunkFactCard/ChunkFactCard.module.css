@@ -1,7 +1,7 @@
 .ChunkFactCard {
   position: relative;
   text-align: center;
-  border-radius: 1rem;
+  border-radius: var(--border-radius);
   width: 100%;
   padding: 1rem;
   background-color: #6bb2a0;
