@@ -18,17 +18,21 @@ const Favourites = () => {
   return (
     <div className={classes.Favourites}>
       <div className={classes.FavouritesMain}>
-        {chunks.map((chunkItem) => (
-          <ChunkFactCard
-            key={chunkItem?.id}
-            value={chunkItem?.value}
-            icon_url={chunkItem?.icon_url}
-            id={chunkItem?.id}
-            url={chunkItem.url}
-            isFavourite={true}
-            updateFavouriteChunks={updateFavouriteChunks}
-          />
-        ))}
+        {chunks.length > 0 ? (
+          chunks.map((chunkItem) => (
+            <ChunkFactCard
+              key={chunkItem?.id}
+              value={chunkItem?.value}
+              icon_url={chunkItem?.icon_url}
+              id={chunkItem?.id}
+              url={chunkItem.url}
+              isFavourite={true}
+              updateFavouriteChunks={updateFavouriteChunks}
+            />
+          ))
+        ) : (
+          <div className={classes.NoFavorites}>There is no favorites yet!!</div>
+        )}
       </div>
     </div>
   );
