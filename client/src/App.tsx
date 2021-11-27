@@ -65,10 +65,17 @@ function App() {
         contentLabel="Example Modal"
         onAfterClose={afterCloseModal}
       >
-        <h2 style={{ marginBottom: "2rem" }}>Hello There</h2>
-        <div>Please Enter Your Email:</div>
-        <input type="text" name="email" onChange={handleEmailChange} />
-        <button onClick={submitEmail}>submit</button>
+        <h2 className="modal-header">Hello There</h2>
+        <div className="modal-text">Please Enter Your Email:</div>
+        <input
+          className="modal-input"
+          type="text"
+          name="email"
+          onChange={handleEmailChange}
+        />
+        <button className="modal-button" onClick={submitEmail}>
+          submit
+        </button>
       </Modal>
     </div>
   );

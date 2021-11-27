@@ -122,16 +122,18 @@ const ChunkFactCard = (props: {
           onRequestClose={closeModal}
           style={customStyles}
           contentLabel="Example Modal"
-          // onAfterClose={afterCloseModal}
         >
-          <h2 style={{ marginBottom: "2rem" }}>Hello There</h2>
-          <div>Please Enter Your Wanted Text:</div>
+          <h2 className="modal-header">Hello There</h2>
+          <div className="modal-text">Please Enter Your Wanted Text:</div>
           <textarea
             name="chunkValue"
             onChange={handleTextChange}
             defaultValue={props.value}
+            className="modal-input"
           ></textarea>
-          <button onClick={handleUpdateChunk}>submit</button>
+          <button className="modal-button" onClick={handleUpdateChunk}>
+            submit
+          </button>
         </Modal>
       </div>
     </div>

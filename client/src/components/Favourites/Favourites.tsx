@@ -8,8 +8,10 @@ const Favourites = () => {
   const [chunks, setChunks] = useState<Array<Chunk>>([]);
 
   useEffect(() => {
-    chunksServices.getFavouriteChunks().then((result) => setChunks(result));
-  }, []);
+    if (localStorage.getItem("email"))
+      chunksServices.getFavouriteChunks().then((result) => setChunks(result));
+    else window.history.pushState(null, "", "/");
+  });
 
   const updateFavouriteChunks = () => {
     chunksServices.getFavouriteChunks().then((result) => setChunks(result));
