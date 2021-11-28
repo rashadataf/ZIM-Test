@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import Modal from "react-modal";
 import chunksServices from "../../services/fetchChunks";
@@ -26,20 +27,30 @@ const ChunkFactCard = (props: {
   isFavourite?: boolean;
   updateFavouriteChunks?: Function;
 }) => {
+  let isFavouriteSubscription = true;
+  let textSubscription = true;
+  let isModalSubscription = true;
   const [isFavourite, setIsFavourite] = React.useState(false);
   const [modalIsOpen, setIsOpen] = React.useState(false);
   const [text, setText] = React.useState("");
 
   React.useEffect(() => {
-    if (!props.isFavourite && !isFavourite) {
-      chunksServices
-        .isChunkFavourite(props.id)
-        .then((result) => setIsFavourite(result));
-    }
-  });
+    let isApiSubscription = true;
+    if (!props.isFavourite && !isFavourite)
+      if (isApiSubscription)
+        chunksServices
+          .isChunkFavourite(props.id)
+          .then((result) => setIsFavourite(result));
+    return () => {
+      isApiSubscription = false;
+      isFavouriteSubscription = false;
+      textSubscription = false;
+      isModalSubscription = false;
+    };
+  }, []);
 
   function closeModal() {
-    setIsOpen(false);
+    if (isModalSubscription) setIsOpen(false);
   }
 
   const addToFavourite = async () => {
@@ -51,12 +62,12 @@ const ChunkFactCard = (props: {
         props.id
       )
     )
-      setIsFavourite(true);
+      if (isFavouriteSubscription) setIsFavourite(true);
   };
 
   function handleTextChange(event: React.ChangeEvent<HTMLTextAreaElement>) {
     const text = event.currentTarget.value;
-    setText(text);
+    if (textSubscription) setText(text);
   }
 
   async function handleUpdateChunk() {
@@ -66,7 +77,7 @@ const ChunkFactCard = (props: {
         props.id
       );
       if (isUpdated) {
-        setIsOpen(false);
+        if (isModalSubscription) setIsOpen(false);
         if (props.updateFavouriteChunks) props.updateFavouriteChunks();
       }
     } catch (error) {
@@ -76,7 +87,7 @@ const ChunkFactCard = (props: {
 
   const removeFromFavourite = async () => {
     if (await chunksServices.removeChunkFromFavourite(props.id))
-      setIsFavourite(false);
+      if (isFavouriteSubscription) setIsFavourite(false);
   };
 
   const toogleFavourite = async () => {

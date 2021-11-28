@@ -1,21 +1,36 @@
 import React, { useState, useEffect } from "react";
+import { Navigate } from "react-router-dom";
 import classes from "./Favourites.module.css";
 import chunksServices from "../../services/fetchChunks";
 import { Chunk } from "../../types/chunk";
 import ChunkFactCard from "../ChunkFactCard/ChunkFactCard";
 
 const Favourites = () => {
+  let chunksSubscription = true;
   const [chunks, setChunks] = useState<Array<Chunk>>([]);
 
   useEffect(() => {
-    if (localStorage.getItem("email"))
-      chunksServices.getFavouriteChunks().then((result) => setChunks(result));
-    else window.history.pushState(null, "", "/");
-  });
+    if (localStorage.getItem("email")) {
+      chunksServices.getFavouriteChunks().then((result) => {
+        if (chunksSubscription) setChunks(result);
+      });
+    }
+
+    return () => {
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      chunksSubscription = false;
+    };
+  }, []);
 
   const updateFavouriteChunks = () => {
-    chunksServices.getFavouriteChunks().then((result) => setChunks(result));
+    chunksServices.getFavouriteChunks().then((result) => {
+      if (chunksSubscription) setChunks(result);
+    });
   };
+
+  if (!localStorage.getItem("email")) {
+    return <Navigate to="/" />;
+  }
 
   return (
     <div className={classes.Favourites}>

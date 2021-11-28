@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import classes from "./Home.module.css";
 import chunksServices from "../../services/fetchChunks";
@@ -5,6 +6,9 @@ import { Chunk } from "../../types/chunk";
 import ChunkFactCard from "../ChunkFactCard/ChunkFactCard";
 
 const Home = () => {
+  let chunkSubscription = true;
+  let chunksSubscription = true;
+  let isSearchSubscription = true;
   const [chunk, setChunk] = useState<Chunk>({
     value: "",
     icon_url: "",
@@ -18,7 +22,14 @@ const Home = () => {
   const [isSearch, setIsSearch] = useState<boolean>(false);
 
   useEffect(() => {
-    chunksServices.fetchRandomChunks().then((result) => setChunk(result));
+    chunksServices.fetchRandomChunks().then((result) => {
+      if (chunkSubscription) setChunk(result);
+    });
+    return () => {
+      chunkSubscription = false;
+      chunksSubscription = false;
+      isSearchSubscription = false;
+    };
   }, []);
 
   const handleSearchChange = async (
@@ -27,28 +38,26 @@ const Home = () => {
     const searchQuery: string = event.currentTarget.value;
     const MIN_SEARCH_QUERY_LENGTH = 3;
     if (searchQuery.length >= MIN_SEARCH_QUERY_LENGTH) {
-      setIsSearch(true);
+      if (isSearchSubscription) setIsSearch(true);
       const searchResult = await chunksServices.searchChunks(searchQuery);
       const chunks = searchResult.result;
-      setChunks(chunks);
+      if (chunksSubscription) setChunks(chunks);
     } else {
-      setIsSearch(false);
-      setChunks([]);
+      if (isSearchSubscription) setIsSearch(false);
+      if (chunksSubscription) setChunks([]);
     }
+  };
+
+  const newRandomChunk = async () => {
+    const chunk = await chunksServices.fetchRandomChunks();
+    if (chunkSubscription) setChunk(chunk);
   };
 
   return (
     <div className={classes.Home}>
       <div className={classes.HomeHeader}>
         {isSearch ? null : (
-          <button
-            onClick={() =>
-              chunksServices
-                .fetchRandomChunks()
-                .then((result) => setChunk(result))
-            }
-            className={classes.HomeHeaderButton}
-          >
+          <button onClick={newRandomChunk} className={classes.HomeHeaderButton}>
             New One
           </button>
         )}
