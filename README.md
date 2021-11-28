@@ -21,10 +21,10 @@ cd ZIM-Test/
 
 ```bash
 cd server/
-npm install
+yarn install
 
 cd ../client/
-npm install
+yarn install
 ```
 
 - now for the back-end you will find **.env.example** file inside *server/* , you need to rename this file to become **.env**
@@ -44,8 +44,8 @@ cp .env.example .env
 
 ```bash
 cd server/
-npm run build
-npm start
+yarn build
+yarn start
 ```
 
 - for the client we only need to update url of api if we changed the port to be something different from *3500*
@@ -58,7 +58,7 @@ npm start
 
 ```bash
 cd client/
-npm start
+yarn start
 ```
 
 ## API Endpoints
