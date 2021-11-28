@@ -1,8 +1,10 @@
 :root {
   --padding: 1rem;
-  --main-color: #e0ecde;
-  --nav-color: #062b31;
-  --header-color: #2c6975;
+  --main-color: #ccb3da;
+  --nav-color: #22052d;
+  --header-color: #4d3156;
+  --card-color: #eeeeee;
+  --active-link-color: #f000ff;
   --border-radius: 1rem;
 }
 
@@ -23,12 +25,11 @@ body {
 .app {
   width: 100vw;
   height: 100vh;
-  background-color: #dbdae9;
 }
 
 .main {
   height: 90vh;
-  background-color: #d7eef0;
+  background-color: var(--main-color);
 }
 
 .modal-header,
