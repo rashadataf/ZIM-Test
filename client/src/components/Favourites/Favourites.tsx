@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import classes from "./Favourites.module.css";
-import chunksServices from "../../services/fetchChunks";
+import chunksServices from "../../services/chunks";
 import { Chunk } from "../../types/chunk";
 import ChunkFactCard from "../ChunkFactCard/ChunkFactCard";
 

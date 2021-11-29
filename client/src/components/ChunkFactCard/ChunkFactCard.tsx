@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import Modal from "react-modal";
-import chunksServices from "../../services/fetchChunks";
+import chunksServices from "../../services/chunks";
 import classes from "./ChunkFactCard.module.css";
 
 const customStyles = {

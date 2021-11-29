@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import classes from "./Home.module.css";
-import chunksServices from "../../services/fetchChunks";
+import chunksServices from "../../services/chunks";
 import { Chunk } from "../../types/chunk";
 import ChunkFactCard from "../ChunkFactCard/ChunkFactCard";
 
