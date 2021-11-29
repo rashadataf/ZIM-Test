@@ -44,8 +44,21 @@ cp .env.example .env
 
 ```bash
 cd server/
-yarn build
+yarn run dev
+```
+
+- or if you want to run in production mode
+
+```bash
+cd server/
+yarn run build
 yarn start
+```
+
+- if you want to run tests, after starting the dev server
+
+```bash
+yarn test
 ```
 
 - for the client we only need to update url of api if we changed the port to be something different from *3500*
